@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Do colégio a vida: Sete lembranças e reflexões</title>
+  <link href="https://fonts.googleapis.com/css2?family=Simonetta:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <style>
+    /* Reset e estilo básico */
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Simonetta', serif;
+      background: linear-gradient(45deg, #C19A6B, #D2B48C, #FFA500, #FF8C00);
+    }
+    
+    /* Fundo glitch */
+    .glitch-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.5;
+      z-index: -1;
+    }
+
+    /* Contagem regressiva */
+    .countdown {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: #fff;
+    }
+    .countdown h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      color: black;
+    }
+    .timer {
+      font-size: 2em;
+      letter-spacing: 2px;
+    }
+
+    /* Animação de queda */
+    .falling {
+      position: absolute;
+      font-size: 2em;
+      opacity: 0.8;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-10vh);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
+
+    /* Estilo do Instagram */
+    .instagram {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 1.2em;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <div class="glitch-background"></div>
+  
+  <div class="countdown">
+    <h1>Do colégio a vida: Sete lembranças e reflexões</h1>
+    <div class="timer" id="timer"></div>
+  </div>
+
+  <div class="instagram">
+    &#x1F4F7; @igornunesrbd
+  </div>
+
+  <script>
+    // Define a data alvo: 7 de julho de 2025 às 07:00:00
+    const targetDate = new Date("July 7, 2025 07:00:00").getTime();
+
+    // Atualiza a contagem a cada segundo
+    const interval = setInterval(function() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+      
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+      document.getElementById("timer").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+      if (distance < 0) {
+        clearInterval(interval);
+        document.getElementById("timer").innerHTML = "Tempo esgotado!";
+      }
+    }, 1000);
+
+    // Cria emojis caindo com o padrão alternado
+    function createFallingSevens() {
+      const positions = [10, 25, 40, 55, 70, 85, 95]; // 7 fileiras fixas
+      positions.forEach(pos => {
+        let seven = document.createElement("div");
+        seven.classList.add("falling");
+        seven.innerHTML = "7";
+        seven.style.left = pos + "vw";
+        seven.style.animationDuration = "5s";
+        document.body.appendChild(seven);
+        setTimeout(() => seven.remove(), 5000);
+      });
+    }
+
+    function createFallingBooks() {
+      const positions = [10, 25, 40, 55, 70, 85, 95]; // 7 fileiras fixas
+      positions.forEach(pos => {
+        let book = document.createElement("div");
+        book.classList.add("falling");
+        book.innerHTML = "📚";
+        book.style.left = pos + "vw";
+        book.style.animationDuration = "5s";
+        document.body.appendChild(book);
+        setTimeout(() => book.remove(), 5000);
+      });
+    }
+
+    setInterval(() => {
+      createFallingSevens();
+      setTimeout(createFallingBooks, 7000); // Livros caem 7s depois dos 7s
+    }, 14000); // Padrão total de 14 segundos para repetir
+  </script>
+</body>
+</html>
+
+
+
+
+
